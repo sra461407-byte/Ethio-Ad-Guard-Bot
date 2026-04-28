@@ -22,6 +22,4 @@ jobs:
           pip install aiogram==2.25.1
 
       - name: Run Bot
-        env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: python bot.py
