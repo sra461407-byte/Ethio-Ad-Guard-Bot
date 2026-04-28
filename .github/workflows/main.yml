@@ -3,7 +3,7 @@ name: Ethio Ad Guard Bot
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: # በእጅህ "Run" ለማድረግ እንዲረዳህ
+  workflow_dispatch:
 
 jobs:
   build:
