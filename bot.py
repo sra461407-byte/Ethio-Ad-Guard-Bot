@@ -4,8 +4,8 @@ import logging
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
 
-# ከ GitHub Secrets የሚመጣ
-API_TOKEN = os.getenv('BOT_TOKEN')
+# ያንተ Token እዚህ ገብቷል
+API_TOKEN = "7735268830:AAHQBAzuHJ33uMr-A34vPSEDmvXmDg21Yg0"
 REQUIRED_ADD = 5 
 DATA_FILE = "user_data.json"
 
@@ -16,8 +16,11 @@ dp = Dispatcher(bot)
 # ዳታውን ለማንበብ
 def load_data():
     if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as f:
-            return json.load(f)
+        try:
+            with open(DATA_FILE, "r") as f:
+                return json.load(f)
+        except:
+            return {}
     return {}
 
 # ዳታውን ለማስቀመጥ
@@ -48,9 +51,11 @@ async def filter_links(message: types.Message):
     if chat_member.is_chat_admin(): return
 
     data = load_data()
-    if data.get(user_id, 0) < REQUIRED_ADD:
+    user_adds = data.get(user_id, 0)
+    
+    if user_adds < REQUIRED_ADD:
         await message.delete()
-        await message.answer(f"❌ ይቅርታ {message.from_user.first_name}፣ ሊንክ ለመለጠፍ መጀመሪያ {REQUIRED_ADD} ሰው መጨመር አለብህ።")
+        await message.answer(f"❌ ይቅርታ {message.from_user.first_name}፣ ሊንክ ለመለጠፍ መጀመሪያ {REQUIRED_ADD} ሰው መጨመር አለብህ። (ያለህ: {user_adds})")
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
