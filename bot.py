@@ -6,8 +6,8 @@ from aiogram.utils import executor
 
 # --- መረጃዎች ---
 API_TOKEN = "7735268830:AAHQBAzuHJ33uMr-A34vPSEDmvXmDg21Yg0"
-CHANNEL_USERNAME = "@TokSaveHub"  # ያንተ የቻናል ስም
-GROUP_ID = -1002444390771        # ያንተ የግሩፕ ID
+CHANNEL_USERNAME = "@toksavehub" # ግዴታ Join የሚደረገው ቻናል
+GROUP_ID = -1002444390771        # ማስታወቂያ የሚለጠፍበት ግሩፕ
 
 logging.basicConfig(level=logging.INFO)
 bot = Bot(token=API_TOKEN)
@@ -44,15 +44,15 @@ async def filter_links(message: types.Message):
     if "t.me" in message.text.lower() or "http" in message.text.lower():
         if not await is_subscribed(user_id):
             await message.delete()
-            await message.answer(f"❌ {message.from_user.first_name}፣ ሊንክ ለመለጠፍ መጀመሪያ ቻናላችንን መቀላቀል አለብህ፡ {CHANNEL_USERNAME}")
+            await message.answer(f"❌ {message.from_user.first_name}፣ ሊንክ ለመለጠፍ መጀመሪያ @toksavehub ቻናልን መቀላቀል አለብህ።")
 
-# --- 3. በየሰዓቱ የሚለጠፍ ማስታወቂያ (ለቻናል እድገት) ---
+# --- 3. በየሰዓቱ የሚለጠፍ ማስታወቂያ (ለእድገት) ---
 async def auto_promo():
     while True:
         await asyncio.sleep(3600) # በየ 1 ሰዓቱ
         promo_text = (
             "🚀 **ቻናላችንን ይቀላቀሉ!**\n\n"
-            "ጠቃሚ መረጃዎችን እና የቲክቶክ ቪዲዮ ማውረጃ ቦቶችን ለማግኘት @TokSaveHub ን Join ያድርጉ።"
+            "ጠቃሚ መረጃዎችን እና የቲክቶክ ቪዲዮ ማውረጃ ቦቶችን ለማግኘት @toksavehub ን Join ያድርጉ።"
         )
         try:
             await bot.send_message(GROUP_ID, promo_text)
